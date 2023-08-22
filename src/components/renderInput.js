@@ -22,7 +22,7 @@ class InputBoxRenderer extends Component {
         </>
       );
     } else {
-      return <p>Please select input type and options</p>;
+      return <p>Please enter title and select input type options</p>;
     }
   }
 }
