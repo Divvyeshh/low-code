@@ -3,6 +3,7 @@ import './Dash.css';
 import InputOptions from './inputOptions';
 import GeneratedCode from './GenerateHTML';
 import InputBoxRenderer from './renderInput';
+import Title from './title';
 import Grid from '@mui/material/Grid';
 
 class Dash extends Component {
@@ -12,6 +13,8 @@ class Dash extends Component {
       type: '',
       placeholder: '',
       name: '',
+      formTitle: '',
+      subTitle: '',
     };
   }
 
@@ -33,6 +36,18 @@ class Dash extends Component {
     });
   };
 
+  handleFormTitle = (event) => {
+    this.setState({
+      formTitle: event.target.value,
+    })
+  }
+
+  handleSubtitle = (event) => {
+    this.setState({
+      subTitle: event.target.value,
+    })
+  }
+
   generateInputCode = () => {
     return `<input type="${this.state.type}" name="${this.state.name}" placeholder="${this.state.placeholder}" />`;
   };
@@ -43,6 +58,7 @@ class Dash extends Component {
       <Grid container spacing={2}>
 
         <Grid item xs={4} className='column'>
+          <Title formTitle={this.state.formTitle} handleFormTitle={this.handleFormTitle} subTitle={this.state.subTitle} handleSubtitle={this.handleSubtitle}/>
           <InputOptions
             type={this.state.type}
             handleType={this.handleType}
@@ -56,6 +72,8 @@ class Dash extends Component {
             type={this.state.type}
             name={this.state.name}
             placeholder={this.state.placeholder}
+            formTitle={this.state.formTitle}
+            subTitle={this.state.subTitle}
           />
         </Grid>
 
