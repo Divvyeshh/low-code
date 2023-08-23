@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.0ea73846.css","mappings":"AAAA,QAEI,qBAAsB,CACtB,iBAAkB,CAFlB,YAGJ","sources":["components/Dash.css"],"sourcesContent":[".column {\n    padding: 10px;\n    border: 1px solid #ccc; \n    border-radius: 8px; \n}"],"names":[],"sourceRoot":""}

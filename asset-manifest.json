@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/low-code/static/css/main.0ea73846.css",
+    "main.js": "/low-code/static/js/main.ab43875b.js",
+    "index.html": "/low-code/index.html",
+    "main.0ea73846.css.map": "/low-code/static/css/main.0ea73846.css.map",
+    "main.ab43875b.js.map": "/low-code/static/js/main.ab43875b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0ea73846.css",
+    "static/js/main.ab43875b.js"
+  ]
+}
