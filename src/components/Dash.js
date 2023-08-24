@@ -49,7 +49,13 @@ class Dash extends Component {
   }
 
   generateInputCode = () => {
-    return `<input type="${this.state.type}" name="${this.state.name}" placeholder="${this.state.placeholder}" />`;
+    return (
+`<h1>${this.state.formTitle}</h1>
+<h2>${this.state.subTitle}</h2>
+<form>
+      <input type="${this.state.type}" name="${this.state.name}" placeholder="${this.state.placeholder}" />
+</form>`
+    );
   };
 
   render() {
