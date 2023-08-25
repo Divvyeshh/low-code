@@ -27,6 +27,7 @@ class Dash extends Component {
        } 
       ],
       dynamic: [],
+      generatedCode: '',
     };
   }
   
@@ -72,29 +73,42 @@ class Dash extends Component {
     })
   }
 
-  dynamicAdd = () => {
-    this.setState((prevState) => ({
-      dynamic: [
-        ...prevState.dynamic,
-        {
-          type: this.state.type,
-          name: this.state.name,
-          placeholder: this.state.placeholder,
-        },
-      ],
-    }));
-  };
-  
+  updateGeneratedCode = () => {
+    const { size, subsize, formTitle, subTitle, dynamic } = this.state;
 
-  generateInputCode = () => {
-    return (
-`<h${this.state.size}>${this.state.formTitle}</h${this.state.size}>
-<h${this.state.subsize}>${this.state.subTitle}</h${this.state.subsize}>
-<form>
-      <input type="${this.state.type}" name="${this.state.name}" placeholder="${this.state.placeholder}" />
-</form>`
+    let inputCode = `<h${size}>${formTitle}</h${size}>
+<h${subsize}>${subTitle}</h${subsize}>
+<form>`;
+
+    dynamic.forEach((input) => {
+      inputCode += `
+  <input type="${input.type}" name="${input.name}" placeholder="${input.placeholder}" />`;
+    });
+
+    inputCode += `
+</form>`;
+
+    return inputCode; 
+  };
+
+  dynamicAdd = () => {
+    this.setState(
+      (prevState) => ({
+        dynamic: [
+          ...prevState.dynamic,
+          {
+            type: this.state.type,
+            name: this.state.name,
+            placeholder: this.state.placeholder,
+          },
+        ],
+      }),
+      () => {
+        this.setState({ generatedCode: this.updateGeneratedCode() }); 
+      }
     );
   };
+  
 
   render() {
     return (
@@ -132,7 +146,7 @@ class Dash extends Component {
         </Grid>
 
         <Grid item xs={4} className='column'>
-          <GeneratedCode generateInputCode={this.generateInputCode} />
+          <GeneratedCode updateGeneratedCode={this.updateGeneratedCode} />
         </Grid>
 
       </Grid>
