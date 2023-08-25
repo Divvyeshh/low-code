@@ -6,6 +6,7 @@ import InputBoxRenderer from './renderInput';
 import TitleSize from './titleSize';
 import Title from './title';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 
 class Dash extends Component {
   constructor(props) {
@@ -18,6 +19,14 @@ class Dash extends Component {
       subTitle: '',
       size: '1',
       subsize: '1',
+      inputs: [
+       {
+        type: '',
+        name: '',
+        placeholder: '',
+       } 
+      ],
+      dynamic: [],
     };
   }
   
@@ -32,7 +41,7 @@ class Dash extends Component {
       subsize: num,
     });
   };
-
+  
   handleType = (event) => {
     this.setState({
       type: event.target.value,
@@ -63,6 +72,20 @@ class Dash extends Component {
     })
   }
 
+  dynamicAdd = () => {
+    this.setState((prevState) => ({
+      dynamic: [
+        ...prevState.dynamic,
+        {
+          type: this.state.type,
+          name: this.state.name,
+          placeholder: this.state.placeholder,
+        },
+      ],
+    }));
+  };
+  
+
   generateInputCode = () => {
     return (
 `<h${this.state.size}>${this.state.formTitle}</h${this.state.size}>
@@ -81,12 +104,18 @@ class Dash extends Component {
         <Grid item xs={4} className='column'>
           <TitleSize handleSize={this.handleSize} handleSubSize={this.handleSubSize}/>
           <Title formTitle={this.state.formTitle} handleFormTitle={this.handleFormTitle} subTitle={this.state.subTitle} handleSubtitle={this.handleSubtitle}/>
-          <InputOptions
-            type={this.state.type}
-            handleType={this.handleType}
-            handleName={this.handleName}
-            handlePlaceholder={this.handlePlaceholder}
-          />
+          {this.state.inputs.map((input, index) => (
+            <div key={index}>
+              <InputOptions
+                inputs={this.state.inputs}
+                index={index}
+                handleType={this.handleType}
+                handleName={this.handleName}
+                handlePlaceholder={this.handlePlaceholder}
+              />
+              <Button variant='text' onClick={this.dynamicAdd}>Add input</Button> 
+            </div>
+          ))}
         </Grid>
 
         <Grid item xs={4} className='column'>
@@ -96,6 +125,9 @@ class Dash extends Component {
             placeholder={this.state.placeholder}
             formTitle={this.state.formTitle}
             subTitle={this.state.subTitle}
+            dynamic={this.state.dynamic}
+            size={this.state.size}
+            subsize={this.state.subsize}
           />
         </Grid>
 

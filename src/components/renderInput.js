@@ -3,22 +3,28 @@ import TextField from '@mui/material/TextField';
 
 class InputBoxRenderer extends Component {
   render() {
-    const { type, name, placeholder, formTitle, subTitle } = this.props;
+    const { type, name, placeholder, formTitle, subTitle, dynamic, size, subsize} = this.props;
+
+    const FormTitleComponent = `h${size}`;
+    const SubTitleComponent = `h${subsize}`;
 
     if (type && name && placeholder && formTitle) {
       return (
         <>
-            <h1>FORM PREVIEW</h1>
-            <h1>{formTitle}</h1>
-            <h3>{subTitle}</h3>
-            <TextField
-            id="outlined-basic"
-            label={name}
-            variant="outlined"
-            type={type}
-            fullWidth
-            placeholder={placeholder}
-            />
+            <FormTitleComponent>{formTitle}</FormTitleComponent>
+            <SubTitleComponent>{subTitle}</SubTitleComponent>
+            <form>
+              {dynamic.map((input, index) => (
+                <TextField
+                  key={index}
+                  type={input.type}
+                  name={input.name}
+                  label={input.name}
+                  fullWidth
+                  variant="outlined"
+                />
+              ))}
+            </form>
         </>
       );
     } else {
