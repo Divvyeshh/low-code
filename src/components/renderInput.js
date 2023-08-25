@@ -9,7 +9,6 @@ class InputBoxRenderer extends Component {
     const FormTitleComponent = `h${size}`;
     const SubTitleComponent = `h${subsize}`;
 
-    if (type && name && placeholder && formTitle) {
       return (
         <>
             <FormTitleComponent>{formTitle}</FormTitleComponent>
@@ -29,9 +28,6 @@ class InputBoxRenderer extends Component {
             <Button variant='outlined'>Submit</Button>
         </>
       );
-    } else {
-      return <p>Please enter title and select input type options</p>;
-    }
   }
 }
 
