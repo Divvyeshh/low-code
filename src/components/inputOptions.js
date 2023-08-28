@@ -15,7 +15,7 @@ class InputOptions extends Component {
     return (
       <div className='container'>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Input</InputLabel>
+          <InputLabel id="demo-simple-select-label" required>Input</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

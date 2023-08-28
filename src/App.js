@@ -3,7 +3,7 @@ import Dash from "./components/Dash";
 function App() {
   return (
     <div className="App">
-      <Dash />
+        <Dash />
     </div>
   );
 }

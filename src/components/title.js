@@ -14,6 +14,7 @@ class Title extends Component{
                     fullWidth
                     value={formTitle}
                     onChange={handleFormTitle}
+                    required
                 />
 
                 <TextField
@@ -24,6 +25,7 @@ class Title extends Component{
                     fullWidth
                     value={subTitle}
                     onChange={handleSubtitle}
+                    required
                 />
             </>
         )
