@@ -1,4 +1,5 @@
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import React, { Component } from 'react';
 
 class Title extends Component{
@@ -6,6 +7,7 @@ class Title extends Component{
         const { formTitle, handleFormTitle, subTitle, handleSubtitle } = this.props;
         return(
             <>
+                <Box my={2}>
                 <TextField
                     id="outlined-basic"
                     label='Title'
@@ -16,7 +18,9 @@ class Title extends Component{
                     onChange={handleFormTitle}
                     required
                 />
+                </Box>
 
+                <Box my={2}>
                 <TextField
                     id="outlined-basic"
                     label='Sub-title'
@@ -27,6 +31,7 @@ class Title extends Component{
                     onChange={handleSubtitle}
                     required
                 />
+                </Box>
             </>
         )
     }

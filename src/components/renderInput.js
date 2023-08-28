@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './render.css'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
 
 class InputBoxRenderer extends Component {
   render() {
@@ -16,7 +16,6 @@ class InputBoxRenderer extends Component {
         <>
             <FormTitleComponent>{formTitle}</FormTitleComponent>
             <SubTitleComponent>{subTitle}</SubTitleComponent>
-            <Box mt={2} mb={2}>
             <form className='form'>
               {dynamic.map((input, index) => (
                 <div style={{marginTop: '15px'}}>
@@ -31,7 +30,7 @@ class InputBoxRenderer extends Component {
                 </div>
               ))}
             </form>
-            </Box>
+
             <Button variant='outlined'>Submit</Button>
             <p style={{color: '#808080'}}><i>Note: This is a preview of the form</i></p>
         </>
@@ -40,7 +39,7 @@ class InputBoxRenderer extends Component {
     else{
       return(
         <>
-            <FormTitleComponent>{formTitle}</FormTitleComponent>
+            {/* <FormTitleComponent>{formTitle}</FormTitleComponent>
             <SubTitleComponent>{subTitle}</SubTitleComponent>
             <form>
               {dynamic.map((input, index) => (
@@ -53,7 +52,11 @@ class InputBoxRenderer extends Component {
                   variant="outlined"
                 />
               ))}
-            </form>
+            </form> */}
+            <Skeleton variant="text" sx={{ fontSize: '1rem' }} style={{marginBottom: '20px', marginTop: '20px'}} animation='wave'/>
+            <Skeleton variant="circular" width={100} height={100} style={{marginBottom: '20px', marginTop: '20px'}} animation='wave'/>
+            <Skeleton variant="rounded" width={530} height={140} style={{marginBottom: '20px', marginTop: '20px'}} animation='wave'/>
+            <Skeleton variant="rounded" width={530} height={140} style={{marginBottom: '20px', marginTop: '20px'}} animation='wave'/>
         </>
       )
     }

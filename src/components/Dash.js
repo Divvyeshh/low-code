@@ -3,6 +3,7 @@ import './Dash.css';
 import InputOptions from './inputOptions';
 import GeneratedCode from './GenerateHTML';
 import InputBoxRenderer from './renderInput';
+import Navbar from './navbar';
 import TitleSize from './titleSize';
 import Title from './title';
 import Grid from '@mui/material/Grid';
@@ -114,10 +115,10 @@ class Dash extends Component {
     return (
       <div className='container'>
       <Grid container spacing={2}>
-
+        <Navbar />
         <Grid item xs={4} className='column'>
-          <TitleSize handleSize={this.handleSize} handleSubSize={this.handleSubSize}/>
           <Title formTitle={this.state.formTitle} handleFormTitle={this.handleFormTitle} subTitle={this.state.subTitle} handleSubtitle={this.handleSubtitle}/>
+          <TitleSize handleSize={this.handleSize} handleSubSize={this.handleSubSize}/>
           {this.state.inputs.map((input, index) => (
             <div key={index}>
               <InputOptions
