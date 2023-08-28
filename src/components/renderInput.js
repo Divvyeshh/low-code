@@ -14,8 +14,8 @@ class InputBoxRenderer extends Component {
     if(formTitle && subTitle){
       return (
         <>
-            <FormTitleComponent>{formTitle}</FormTitleComponent>
-            <SubTitleComponent>{subTitle}</SubTitleComponent>
+            <FormTitleComponent className='font'>{formTitle}</FormTitleComponent>
+            <SubTitleComponent className='font'>{subTitle}</SubTitleComponent>
             <form className='form'>
               {dynamic.map((input, index) => (
                 <div style={{marginTop: '15px'}}>
@@ -39,20 +39,6 @@ class InputBoxRenderer extends Component {
     else{
       return(
         <>
-            {/* <FormTitleComponent>{formTitle}</FormTitleComponent>
-            <SubTitleComponent>{subTitle}</SubTitleComponent>
-            <form>
-              {dynamic.map((input, index) => (
-                <TextField
-                  key={index}
-                  type={input.type}
-                  name={input.name}
-                  label={input.name}
-                  fullWidth
-                  variant="outlined"
-                />
-              ))}
-            </form> */}
             <Skeleton variant="text" sx={{ fontSize: '1rem' }} style={{marginBottom: '20px', marginTop: '20px'}} animation='wave'/>
             <Skeleton variant="circular" width={100} height={100} style={{marginBottom: '20px', marginTop: '20px'}} animation='wave'/>
             <Skeleton variant="rounded" width={530} height={140} style={{marginBottom: '20px', marginTop: '20px'}} animation='wave'/>

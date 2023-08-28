@@ -105,7 +105,12 @@ class Dash extends Component {
         ],
       }),
       () => {
-        this.setState({ generatedCode: this.updateGeneratedCode() }); 
+        this.setState({
+          generatedCode: this.updateGeneratedCode(),
+          name: '', 
+          placeholder: '', 
+          type: '', 
+        });
       }
     );
   };
@@ -117,8 +122,8 @@ class Dash extends Component {
       <Grid container spacing={2}>
         <Navbar />
         <Grid item xs={4} className='column'>
-          <Title formTitle={this.state.formTitle} handleFormTitle={this.handleFormTitle} subTitle={this.state.subTitle} handleSubtitle={this.handleSubtitle}/>
-          <TitleSize handleSize={this.handleSize} handleSubSize={this.handleSubSize}/>
+          <Title formTitle={this.state.formTitle} handleFormTitle={this.handleFormTitle} subTitle={this.state.subTitle} handleSubtitle={this.handleSubtitle} className='font'/>
+          <TitleSize handleSize={this.handleSize} handleSubSize={this.handleSubSize} className='font'/>
           {this.state.inputs.map((input, index) => (
             <div key={index}>
               <InputOptions
@@ -127,6 +132,7 @@ class Dash extends Component {
                 handleType={this.handleType}
                 handleName={this.handleName}
                 handlePlaceholder={this.handlePlaceholder}
+                className='font'
               />
               <Button variant='text' onClick={this.dynamicAdd}>Add input</Button> 
             </div>
@@ -143,6 +149,7 @@ class Dash extends Component {
             dynamic={this.state.dynamic}
             size={this.state.size}
             subsize={this.state.subsize}
+            className='font'
           />
         </Grid>
 

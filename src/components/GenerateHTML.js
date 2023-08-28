@@ -8,7 +8,7 @@ class GeneratedCode extends Component {
   
       return (
         <div className='container'>
-          <p>HTML code:</p>
+          <p className='font'>HTML code:</p>
           <pre>{generatedCode}</pre>
           <Button variant='outlined' onClick={ () => {navigator.clipboard.writeText(generatedCode);}}> Copy </Button>
         </div>
