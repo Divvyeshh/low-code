@@ -1,0 +1,27 @@
+.main-button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .expanded-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .expanded-buttons button {
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .expanded-buttons button:last-child {
+    margin-bottom: 0;
+  }
+  
