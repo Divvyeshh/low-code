@@ -52,18 +52,6 @@ class Dash extends Component {
       multipleQuestion: [],
     };
   }
-  handleAddQuestion = () => {
-    const updatedQuestions = [
-      ...this.state.questions, 
-      {
-        text: this.state.questions.text,
-        options: [...this.state.questions.options]
-      },
-    ];
-    this.setState({
-      questions: updatedQuestions,
-    });
-  }
 
   handleQuestionChange = (e, questionIndex) => {
     const { questions } = this.state; // Assuming you have 'questions' in your state
@@ -78,13 +66,18 @@ class Dash extends Component {
     this.setState({ questions: updatedQuestions });
   };
 
-  handleAddInput= () => {
-    this.setState((prevState) => ({
-      inputFields: [...prevState.inputFields, 
-        {type: this.state.type}
-      ]
-    }))
-  }
+  handleAddInput = () => {
+    this.setState(
+      (prevState) => ({
+        inputFields: [...prevState.inputFields, { type: this.state.type }],
+      }),
+      () => {
+        this.setState({
+          generatedCode: this.updateGeneratedCode(),
+        });
+      }
+    );
+  };  
 
   handleInputClick = () => {
     this.setState({
@@ -104,7 +97,7 @@ class Dash extends Component {
     });
   };
 
-  handleOption = (event, questionIndex, optionIndex) => { // Fixed 'questionIndex' definition
+  handleOption = (event, questionIndex, optionIndex) => {
     const updatedQuestions = [...this.state.questions];
     updatedQuestions[questionIndex].options[optionIndex] = event.target.value;
     this.setState({ questions: updatedQuestions });
@@ -117,35 +110,15 @@ class Dash extends Component {
       options: ['', '', '', ''],
     });
     const updatedMultipleQuestions = [...this.state.multipleQuestion];
-  
     this.setState({
       questions: updatedQuestions,
       multipleQuestion: updatedMultipleQuestions,
+    }, () => {
+      this.setState({
+        generatedCode: this.updateGeneratedCode(),
+      });
     });
   };
-
-  // dynamicAdd = () => {
-  //   this.setState(
-  //     (prevState) => ({
-  //       dynamic: [
-  //         ...prevState.dynamic,
-  //         {
-  //           type: this.state.type,
-  //           name: this.state.name,
-  //           placeholder: this.state.placeholder,
-  //         },
-  //       ],
-  //     }),
-  //     () => {
-  //       this.setState({
-  //         generatedCode: this.updateGeneratedCode(),
-  //         name: '', 
-  //         placeholder: '', 
-  //         type: '', 
-  //       });
-  //     }
-  //   );
-  // };
 
   handleSize = (val) => {
     this.setState({
@@ -190,20 +163,36 @@ class Dash extends Component {
   }
 
   updateGeneratedCode = () => {
-    const { size, subsize, formTitle, subTitle, dynamic } = this.state;
+    const { size, subsize, formTitle, subTitle, inputFields, description, questions } = this.state;
 
     let inputCode = `<h${size}>${formTitle}</h${size}>
 <h${subsize}>${subTitle}</h${subsize}>
+<p>${description}</p>
 <form>`;
 
-    dynamic.forEach((input) => {
+    inputFields.forEach((input) => {
       inputCode += `
   <input type="${input.type}" name="${input.name}" placeholder="${input.placeholder}" />`;
     });
 
+    questions.forEach((question, index) => {
+      inputCode += `
+    <div>
+      <p>Question ${index + 1}: ${question.text}</p>
+      <ul>`;
+      
+      question.options.forEach((option) => {
+        inputCode += `
+        <li>${option}</li>`;
+      });
+  
+      inputCode += `
+      </ul>
+    </div>`;
+    });
+
     inputCode += `
 </form>`;
-
     return inputCode; 
   };
   
@@ -242,47 +231,6 @@ class Dash extends Component {
             handleQuestionChange={this.handleQuestionChange}
             addQuestions={this.addQuestions}
           />
-
-          {/* {this.state.inputs.map((input, index) => (
-            <div key={index}>
-              <InputOptions
-                inputs={this.state.inputs}
-                index={index}
-                handleType={this.handleType}
-                handleName={this.handleName}
-                handlePlaceholder={this.handlePlaceholder}
-                className='font'
-              />
-              <Button variant='text' onClick={this.dynamicAdd}>Add input</Button> 
-            </div>
-          ))}
-          
-          
-          {this.state.questions.map((question, questionIndex) => (
-              <div key={questionIndex}>
-                <TextField 
-                  label={`Question ${questionIndex + 1}`}
-                  value={question.text}
-                  onChange={(event) =>
-                    this.handleQuestionText(event, questionIndex)
-                  }
-                />
-                {question.options.map((option, optionIndex) => (
-                  <div key={optionIndex}>
-                    <TextField
-                      label={`Option ${optionIndex + 1}`}
-                      value={option}
-                      onChange={(event) =>
-                        this.handleOption(event, questionIndex, optionIndex)
-                      }
-                    />
-                  </div>
-                ))}
-                <Button variant='text' onClick={this.addQuestion}>
-                  Add Question
-                </Button>
-              </div> 
-            ))}*/}
         </Grid>
 
         <Grid item xs={4} className='column'>
